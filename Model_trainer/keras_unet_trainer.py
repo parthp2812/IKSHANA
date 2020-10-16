@@ -37,9 +37,9 @@ def train():
     img_data_gen.fit(train_x, augment=True, seed=7)
     img_data_gen.fit(train_y, augment=True, seed=7)
     image_generator=img_data_gen.flow(x=train_x, y=train_y, batch_size=32, shuffle=True)
-    # train_generator=zip(img)
+   
     history = auto_encoder.fit_generator(image_generator, epochs=100,
-                                         steps_per_epoch=3000, validation_data=(test_x, test_y), verbose=1)
+                                         steps_per_epoch=3000, validation_data=(test_x, test_y))
     auto_encoder.save('road4.MODEL')
     plt.plot(history.history['acc'])
     plt.plot(history.history['val_acc'])
