@@ -103,12 +103,7 @@ def init(**kwargs):
     train, validation = torch.utils.data.random_split(data, [train_size, test_size])
     train_loader = DataLoader(train, batch_size=batch_size, shuffle=True, num_workers=4)
     valid_loader = DataLoader(validation, batch_size=batch_size, shuffle=True, num_workers=4)
-    # x=iter(dataLoader)
-    # img,mask=x.next()
-    # grid=torchvision.utils.make_grid(img)
-    # writer.add_image('images',grid,0)
-    # writer.add_graph(net,img)
-    # writer.close()
+    
     net.to(device)
 
 
@@ -158,11 +153,10 @@ def training_loop(**kwargs):
         criterion = nn.BCEWithLogitsLoss()
     elif model == "cnn":
         criterion = nn.CrossEntropyLoss()
-    # opt=torch.optim.SGD(net.parameters(),lr=lr,momentum=0.9)
+    
     opt = optim.Adam(net.parameters(),lr=lr,weight_decay=1e-5)
     sch = torch.optim.lr_scheduler.ReduceLROnPlateau(opt)
-    # sch=torch.optim.lr_scheduler.StepLR(opt, step_size=50, gamma=0.1)
-    # sch=torch.optim.lr_scheduler.OneCycleLR(opt, max_lr=0.01, steps_per_epoch=len(train_loader), epochs=50)
+    
     xx = []
     yy = []
     for epoch_num in range(1, epochs+1):
