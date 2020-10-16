@@ -46,7 +46,7 @@ class LoadCnn(Dataset):
         
         img = cv2.cvtColor(img,cv2.COLOR_RGB2BGR)
         cv2.imshow("ds", img)
-        cv2.waitKey(0)
+        cv2.waitKey(1)
 
 
 if __name__ == "__main__":
