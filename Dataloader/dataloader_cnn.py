@@ -15,9 +15,7 @@ class LoadCnn(Dataset):
         self.height = kwargs["height"]
         self.samples = []
         self.dic = {"left": 0, "center": 1, "right": 2}
-        self.returnSamples("/home/satinder/Desktop/deepWay/DeepWay.v2/dataSet/lane/left",
-                           "/home/satinder/Desktop/deepWay/DeepWay.v2/dataSet/lane/center",
-                           "/home/satinder/Desktop/deepWay/DeepWay.v2/dataSet/lane/right")
+        self.returnSamples("")
         self.transforms_img=transforms.Compose([transforms.ToTensor(),
                                                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
@@ -27,7 +25,7 @@ class LoadCnn(Dataset):
             img_folder = os.listdir(path)
             for i in tqdm(img_folder):
                 p = path.split('/')[-1]
-                # print(p)
+                
                 label = self.dic[p]
                 self.samples.append((path+"/"+i, label))
 
@@ -45,7 +43,7 @@ class LoadCnn(Dataset):
 
     def plot(self, img):
         img = np.transpose(img.numpy(),(1,2,0))
-        # img=img*0.5+0.5
+        
         img = cv2.cvtColor(img,cv2.COLOR_RGB2BGR)
         cv2.imshow("ds", img)
         cv2.waitKey(0)
