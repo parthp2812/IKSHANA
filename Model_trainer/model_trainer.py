@@ -11,7 +11,6 @@ sys.path.append('')
 import torch.nn as nn
 import torch.optim as optim
 from torchsummary import summary
-from dataLoader.dataloader_unet import Load
 from dataLoader.dataloader_cnn import LoadCnn
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
@@ -52,10 +51,7 @@ def calc_loss(pred, target, bce_weight=0.5):
     pred = torch.sigmoid(pred)
     dice = dice_loss(pred, target)
     loss = bce * bce_weight + dice * (1 - bce_weight)
-    # metrics['bce'] += bce.data.cpu().numpy() * target.size(0)
-    # metrics['dice'] += dice.data.cpu().numpy() * target.size(0)
-    # metrics['loss'] += loss.data.cpu().numpy() * target.size(0)
-    return loss
+    return(loss)
 
 
 def weights_init(m):
