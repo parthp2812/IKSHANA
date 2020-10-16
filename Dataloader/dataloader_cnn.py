@@ -17,7 +17,7 @@ class LoadCnn(Dataset):
         self.dic = {"left": 0, "center": 1, "right": 2}
         self.returnSamples("")
         self.transforms_img=transforms.Compose([transforms.ToTensor(),
-                                                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+                                                transforms.Normalize()
 
     def return_samples(self, *args):
 
@@ -42,7 +42,7 @@ class LoadCnn(Dataset):
         return img, j
 
     def plot(self, img):
-        img = np.transpose(img.numpy(),(1,2,0))
+        img = np.transpose(img.numpy())
         
         img = cv2.cvtColor(img,cv2.COLOR_RGB2BGR)
         cv2.imshow("ds", img)
@@ -50,7 +50,7 @@ class LoadCnn(Dataset):
 
 
 if __name__ == "__main__":
-    obj = LoadCnn(width=512, height=512)
-    res = obj(5000)
+    obj = LoadCnn(width, height)
+    res = obj()
     obj.plot(res[0])
     print(res[1])
